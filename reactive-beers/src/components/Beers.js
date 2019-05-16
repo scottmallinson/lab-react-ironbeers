@@ -6,17 +6,24 @@ export default class Beers extends Component {
   constructor(){
     super()
     this.state = {
-        beers: []
+      beers: []
     }
   }
 
   componentDidMount() {
     axios.get("https://ih-beer-api.herokuapp.com/beers")
     .then(response => {
-        // console.log(response.data)
-        this.setState({beers: response.data})
+      this.setState({beers: response.data})
     })
-};
+  };
+
+  selectedBeer(beerid) {
+    const id = beerid
+    const beer = this.state.beers.filter((beer =>
+      beer._id === id
+    ))
+    return { selectedBeer: beer }
+  }
 
   render() {
     return (
@@ -25,7 +32,7 @@ export default class Beers extends Component {
           <div key={index}>
             <Link to={{
               pathname: `/beers/${beer._id}`,
-              state: { beers: this.state.beers }
+              state: { selectedBeer: this.selectedBeer(beer._id) }
             }}>
               <h1>{beer.name}</h1>
               <img src={beer.image_url} alt='' />

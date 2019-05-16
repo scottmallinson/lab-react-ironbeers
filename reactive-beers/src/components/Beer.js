@@ -2,27 +2,14 @@ import React, { Component } from 'react'
 
 export default class Beer extends Component {
   state = {
-    beers: this.props.location.state.beers,
-    selectedBeer: {}
+    selectedBeer: this.props.location.state.selectedBeer.selectedBeer[0],
   }
-
-  componentDidMount(){
-    // a funtion that takes the cca3 from props and returns its country from the list
-    const id = this.props.match.params.beerid;
-    const beer = this.state.beers.filter((beer =>
-      beer._id === id
-      ))
-      this.setState({
-        selectedBeer: beer
-      })
-    }
       
   render() {
-    console.log(this.state.selectedBeer);
+    const {selectedBeer} = this.state;
     
     return (
-      <div>
-        <h1>An individual beer</h1>
+        <div><h1>{selectedBeer.name}</h1><img src={selectedBeer.image_url} alt='' /><h2>{selectedBeer.tagline}</h2><p>{selectedBeer.description}</p><p>First brewed: {selectedBeer.first_brewed}</p><p>Attenuation level: {selectedBeer.attenuation_level}</p><p>Contributed by: {selectedBeer.contributed_by}</p>
       </div>
     )
   }
