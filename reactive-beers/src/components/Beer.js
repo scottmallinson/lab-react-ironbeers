@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 
 export default class Beer extends Component {
   state = {
-    selectedBeer: this.props.location.state.selectedBeer.selectedBeer[0],
+    selectedBeer: this.props.location.state.selectedBeer,
   }
       
   render() {
     const {selectedBeer} = this.state;
-    
     return (
       <div>
         <h1>{selectedBeer.name}</h1>
